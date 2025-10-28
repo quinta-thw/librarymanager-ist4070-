@@ -1,0 +1,31 @@
+The Lord of the Rings|J.R.R. Tolkien|1954|Fantasy|Available|5|
+Harry Potter and the Philosopher's Stone|J.K. Rowling|1997|Fantasy|Available|5|
+The Great Gatsby|F. Scott Fitzgerald|1925|Fiction|Available|4|
+To Kill a Mockingbird|Harper Lee|1960|Fiction|Available|5|
+1984|George Orwell|1949|Dystopian Fiction|Available|5|
+Pride and Prejudice|Jane Austen|1813|Romance|Available|4|
+The Catcher in the Rye|J.D. Salinger|1951|Coming-of-Age Fiction|Available|4|
+Dune|Frank Herbert|1965|Science Fiction|Available|5|
+The Da Vinci Code|Dan Brown|2003|Mystery Thriller|Available|4|
+The Hunger Games|Suzanne Collins|2008|Dystopian Fiction|Available|4|
+Gone Girl|Gillian Flynn|2012|Psychological Thriller|Available|4|
+The Alchemist|Paulo Coelho|1988|Philosophical Fiction|Available|4|
+Sapiens|Yuval Noah Harari|2011|Non-Fiction|Available|5|
+Educated|Tara Westover|2018|Memoir|Available|5|
+Where the Crawdads Sing|Delia Owens|2018|Literary Fiction|Available|4|
+hey|Quinta mellisa|2017|Fiction|want-to-read|0|
+The Hobbit|J.R.R. Tolkien|1937|Fantasy|Available|5|
+Brave New World|Aldous Huxley|1932|Dystopian Fiction|Available|4|
+The Chronicles of Narnia|C.S. Lewis|1950|Fantasy|Available|5|
+The Kite Runner|Khaled Hosseini|2003|Literary Fiction|Available|4|
+Life of Pi|Yann Martel|2001|Adventure Fiction|Available|4|
+The Girl with the Dragon Tattoo|Stieg Larsson|2005|Crime Thriller|Available|4|
+Atomic Habits|James Clear|2018|Self-Help|Available|5|
+The Seven Husbands of Evelyn Hugo|Taylor Jenkins Reid|2017|Historical Fiction|Available|4|
+Becoming|Michelle Obama|2018|Memoir|Available|5|
+The Silent Patient|Alex Michaelides|2019|Psychological Thriller|Available|4|
+Circe|Madeline Miller|2018|Mythology Fiction|Available|4|
+The Midnight Library|Matt Haig|2020|Philosophical Fiction|Available|4|
+Project Hail Mary|Andy Weir|2021|Science Fiction|Available|5|
+The Thursday Murder Club|Richard Osman|2020|Cozy Mystery|Available|4|
+Klara and the Sun|Kazuo Ishiguro|2021|Literary Science Fiction|Available|4|

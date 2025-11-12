@@ -7,8 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -717,24 +715,31 @@ public class AuthenticatedLibraryWebServer {
                 "    <style>\n" +
                 "        * { margin: 0; padding: 0; box-sizing: border-box; }\n" +
                 "        body {\n" +
-                "            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n" +
-                "            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n" +
+                "            font-family: 'Georgia', 'Times New Roman', serif;\n" +
+                "            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #1a252f 50%, #2c3e50 75%, #34495e 100%);\n"
+                +
+                "            background-size: 400% 400%;\n" +
+                "            animation: gradientShift 15s ease infinite;\n" +
                 "            min-height: 100vh;\n" +
                 "            display: flex;\n" +
                 "            align-items: center;\n" +
                 "            justify-content: center;\n" +
+                "            position: relative;\n" +
                 "        }\n" +
                 "        .login-container {\n" +
-                "            background: white;\n" +
+                "            background: linear-gradient(135deg, rgba(52, 73, 94, 0.95) 0%, rgba(44, 62, 80, 0.98) 100%);\n"
+                +
+                "            backdrop-filter: blur(15px);\n" +
+                "            border: 2px solid #d4af37;\n" +
                 "            padding: 40px;\n" +
                 "            border-radius: 20px;\n" +
-                "            box-shadow: 0 20px 40px rgba(0,0,0,0.1);\n" +
+                "            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);\n" +
                 "            width: 100%;\n" +
                 "            max-width: 400px;\n" +
                 "            text-align: center;\n" +
                 "        }\n" +
                 "        h1 {\n" +
-                "            color: #333;\n" +
+                "            color: #d4af37;\n" +
                 "            margin-bottom: 30px;\n" +
                 "            font-size: 28px;\n" +
                 "        }\n" +
@@ -746,7 +751,8 @@ public class AuthenticatedLibraryWebServer {
                 "            display: block;\n" +
                 "            margin-bottom: 5px;\n" +
                 "            font-weight: 600;\n" +
-                "            color: #555;\n" +
+                "            color: #ecf0f1;\n" +
+                "            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);\n" +
                 "        }\n" +
                 "        input[type=\"text\"], input[type=\"password\"] {\n" +
                 "            width: 100%;\n" +
@@ -834,10 +840,14 @@ public class AuthenticatedLibraryWebServer {
                 "    <style>\n" +
                 "        * { margin: 0; padding: 0; box-sizing: border-box; }\n" +
                 "        body {\n" +
-                "            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n" +
-                "            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n" +
+                "            font-family: 'Georgia', 'Times New Roman', serif;\n" +
+                "            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #1a252f 50%, #2c3e50 75%, #34495e 100%);\n"
+                +
+                "            background-size: 400% 400%;\n" +
+                "            animation: gradientShift 15s ease infinite;\n" +
                 "            min-height: 100vh;\n" +
-                "            color: white;\n" +
+                "            color: #ecf0f1;\n" +
+                "            position: relative;\n" +
                 "        }\n" +
                 "        .header {\n" +
                 "            padding: 20px;\n" +
@@ -1483,8 +1493,8 @@ public class AuthenticatedLibraryWebServer {
                 +
                 "                                     'background: rgba(255,255,255,0.1); margin-right: 20%;');\n" +
                 "            \n" +
-                "            // Format message (convert \n to <br> for line breaks)\n" +
-                "            const formattedMessage = message.replace(/\\\n/g, '<br>').replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n"
+                "            // Format message (convert \\n to <br> for line breaks)\n" +
+                "            const formattedMessage = message.replace(/\\\\n/g, '<br>').replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n"
                 +
                 "            messageDiv.innerHTML = (sender === 'user' ? '👤 ' : '🤖 ') + formattedMessage;\n" +
                 "            \n" +
@@ -1688,10 +1698,10 @@ public class AuthenticatedLibraryWebServer {
                 "        \n" +
                 "        window.removeBook = function(title, author, rating) {\n" +
                 "            const ratingWarning = rating <= 2 && rating > 0 ? \n" +
-                "                '\n\n⚠️ WARNING: This book has a poor rating (' + rating + '/5). Removing it may improve your library quality!' : '';\n"
+                "                '\\n\\n⚠️ WARNING: This book has a poor rating (' + rating + '/5). Removing it may improve your library quality!' : '';\n"
                 +
                 "            \n" +
-                "            const confirmMessage = `Are you sure you want to remove:\n\n\"${title}\" by ${author}?${ratingWarning}`;\n"
+                "            const confirmMessage = `Are you sure you want to remove:\\n\\n\"${title}\" by ${author}?${ratingWarning}`;\n"
                 +
                 "            \n" +
                 "            if (confirm(confirmMessage)) {\n" +
@@ -1787,7 +1797,7 @@ public class AuthenticatedLibraryWebServer {
                 "            const messages = document.getElementById('chatbotMessages');\n" +
                 "            const messageDiv = document.createElement('div');\n" +
                 "            messageDiv.className = 'chat-message ' + sender + '-message';\n" +
-                "            const formattedMessage = message.replace(/\\\n/g, '<br>').replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n"
+                "            const formattedMessage = message.replace(/\\\\n/g, '<br>').replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n"
                 +
                 "            messageDiv.innerHTML = formattedMessage;\n" +
                 "            messages.appendChild(messageDiv);\n" +
@@ -1800,362 +1810,22 @@ public class AuthenticatedLibraryWebServer {
 
     private String getUserDashboard(SimpleUser user) {
         return "<!DOCTYPE html>\n" +
-                "<html>\n" +
-                "<head>\n" +
-                "    <title>Library Dashboard</title>\n" +
-                "    <style>\n" +
-                "        body { font-family: Georgia, serif; background: #2c3e50; color: #ecf0f1; margin: 0; padding: 20px; }\n" +
-                "        .header { text-align: center; padding: 20px; border-bottom: 1px solid #34495e; }\n" +
-                "        .content { max-width: 800px; margin: 0 auto; padding: 20px; }\n" +
-                "        .section { background: rgba(255,255,255,0.1); padding: 20px; margin: 20px 0; border-radius: 10px; }\n" +
-                "        .btn { background: #d4af37; color: #2c3e50; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }\n" +
-                "    </style>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "    <div class=\"header\">\n" +
-                "        <h1>📚 Library Manager</h1>\n" +
-                "        <p>Welcome, " + user.getFullName() + "</p>\n" +
-                "        <a href=\"/api/logout\" class=\"btn\">Logout</a>\n" +
-                "    </div>\n" +
-                "    <div class=\"content\">\n" +
-                "        <div class=\"section\">\n" +
-                "            <h2>Library Overview</h2>\n" +
-                "            <p>Total Books: " + books.size() + "</p>\n" +
-                "            <p>Genres: " + getGenreCount() + "</p>\n" +
-                "        </div>\n" +
-                "        <div class=\"section\">\n" +
-                "            <h2>Quick Actions</h2>\n" +
-                "            <a href=\"/browse\" class=\"btn\">Browse Books</a>\n" +
-                "        </div>\n" +
-                "    </div>\n" +
-                "</body>\n" +
-                "</html>";
-    }
-
-    private String getBooksJson() {
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
                 "    <meta charset=\"UTF-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    <title>Library Dashboard</title>\n" +
+                "    <title>User Dashboard</title>\n" +
                 "    <style>\n" +
                 "        * { margin: 0; padding: 0; box-sizing: border-box; }\n" +
-                "        \n" +
                 "        body {\n" +
                 "            font-family: 'Georgia', 'Times New Roman', serif;\n" +
-                "            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #1a252f 50%, #2c3e50 75%, #34495e 100%);\n" +
+                "            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #1a252f 50%, #2c3e50 75%, #34495e 100%);\n"
+                +
                 "            background-size: 400% 400%;\n" +
                 "            animation: gradientShift 15s ease infinite;\n" +
                 "            min-height: 100vh;\n" +
                 "            color: #ecf0f1;\n" +
                 "            position: relative;\n" +
-                "        }\n" +
-                "        \n" +
-                "        body::before {\n" +
-                "            content: '';\n" +
-                "            position: fixed;\n" +
-                "            top: 0;\n" +
-                "            left: 0;\n" +
-                "            width: 100%;\n" +
-                "            height: 100%;\n" +
-                "            background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"books\" x=\"0\" y=\"0\" width=\"20\" height=\"20\" patternUnits=\"userSpaceOnUse\"><rect width=\"2\" height=\"15\" x=\"2\" y=\"2\" fill=\"%23d4af37\" opacity=\"0.1\"/><rect width=\"2\" height=\"12\" x=\"6\" y=\"5\" fill=\"%23c0392b\" opacity=\"0.1\"/><rect width=\"2\" height=\"18\" x=\"10\" y=\"1\" fill=\"%232980b9\" opacity=\"0.1\"/><rect width=\"2\" height=\"14\" x=\"14\" y=\"3\" fill=\"%2327ae60\" opacity=\"0.1\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23books)\"/></svg>') repeat;\n" +
-                "            opacity: 0.3;\n" +
-                "            z-index: -1;\n" +
-                "        }\n" +
-                "        \n" +
-                "        @keyframes gradientShift {\n" +
-                "            0% { background-position: 0% 50%; }\n" +
-                "            50% { background-position: 100% 50%; }\n" +
-                "            100% { background-position: 0% 50%; }\n" +
-                "        }\n" +
-                "        \n" +
-                "        .header {\n" +
-                "            background: linear-gradient(135deg, rgba(52, 73, 94, 0.95), rgba(44, 62, 80, 0.95));\n" +
-                "            backdrop-filter: blur(20px);\n" +
-                "            padding: 25px;\n" +
-                "            text-align: center;\n" +
-                "            border-bottom: 3px solid #d4af37;\n" +
-                "            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);\n" +
-                "            position: relative;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .header::before {\n" +
-                "            content: '📚';\n" +
-                "            position: absolute;\n" +
-                "            top: 10px;\n" +
-                "            left: 25px;\n" +
-                "            font-size: 2.5em;\n" +
-                "            opacity: 0.7;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .header h1 {\n" +
-                "            font-size: 2.8em;\n" +
-                "            margin-bottom: 10px;\n" +
-                "            color: #d4af37;\n" +
-                "            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);\n" +
-                "            font-weight: bold;\n" +
-                "            letter-spacing: 2px;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .header p {\n" +
-                "            font-size: 1.2em;\n" +
-                "            color: #bdc3c7;\n" +
-                "            font-style: italic;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .user-info {\n" +
-                "            display: flex;\n" +
-                "            justify-content: space-between;\n" +
-                "            align-items: center;\n" +
-                "            margin-top: 15px;\n" +
-                "            padding-top: 15px;\n" +
-                "            border-top: 1px solid rgba(212, 175, 55, 0.3);\n" +
-                "        }\n" +
-                "        \n" +
-                "        .user-info span {\n" +
-                "            font-size: 1.1em;\n" +
-                "            color: #ecf0f1;\n" +
-                "            font-weight: 500;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .logout-btn {\n" +
-                "            background: linear-gradient(135deg, #c0392b, #e74c3c);\n" +
-                "            color: white;\n" +
-                "            border: none;\n" +
-                "            padding: 12px 24px;\n" +
-                "            border-radius: 25px;\n" +
-                "            cursor: pointer;\n" +
-                "            text-decoration: none;\n" +
-                "            font-weight: 600;\n" +
-                "            transition: all 0.3s ease;\n" +
-                "            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);\n" +
-                "        }\n" +
-                "        \n" +
-                "        .logout-btn:hover {\n" +
-                "            transform: translateY(-2px);\n" +
-                "            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);\n" +
-                "        }\n" +
-                "        \n" +
-                "        .main-content {\n" +
-                "            max-width: 1200px;\n" +
-                "            margin: 40px auto;\n" +
-                "            padding: 0 30px;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .navigation-section {\n" +
-                "            background: linear-gradient(135deg, rgba(39, 174, 96, 0.15), rgba(46, 204, 113, 0.15));\n" +
-                "            backdrop-filter: blur(15px);\n" +
-                "            border-radius: 20px;\n" +
-                "            padding: 35px;\n" +
-                "            margin-bottom: 30px;\n" +
-                "            border: 2px solid rgba(39, 174, 96, 0.3);\n" +
-                "            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);\n" +
-                "            position: relative;\n" +
-                "            overflow: hidden;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .navigation-section h2 {\n" +
-                "            font-size: 2.2em;\n" +
-                "            color: #27ae60;\n" +
-                "            margin-bottom: 20px;\n" +
-                "            text-align: center;\n" +
-                "            font-weight: bold;\n" +
-                "            position: relative;\n" +
-                "            z-index: 1;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .browse-btn {\n" +
-                "            background: linear-gradient(135deg, #3498db, #2980b9);\n" +
-                "            color: white;\n" +
-                "            padding: 18px 40px;\n" +
-                "            text-decoration: none;\n" +
-                "            border-radius: 30px;\n" +
-                "            font-size: 1.3em;\n" +
-                "            display: inline-block;\n" +
-                "            margin: 15px;\n" +
-                "            transition: all 0.4s ease;\n" +
-                "            font-weight: 600;\n" +
-                "            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.3);\n" +
-                "            position: relative;\n" +
-                "            z-index: 1;\n" +
-                "            border: 2px solid transparent;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .browse-btn:hover {\n" +
-                "            transform: translateY(-5px) scale(1.05);\n" +
-                "            box-shadow: 0 10px 35px rgba(52, 152, 219, 0.4);\n" +
-                "            border-color: #d4af37;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .quick-stats-section {\n" +
-                "            background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(142, 68, 173, 0.15));\n" +
-                "            backdrop-filter: blur(15px);\n" +
-                "            border-radius: 20px;\n" +
-                "            padding: 35px;\n" +
-                "            margin-bottom: 30px;\n" +
-                "            border: 2px solid rgba(155, 89, 182, 0.3);\n" +
-                "            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);\n" +
-                "        }\n" +
-                "        \n" +
-                "        .quick-stats-section h2 {\n" +
-                "            font-size: 2.2em;\n" +
-                "            color: #9b59b6;\n" +
-                "            margin-bottom: 25px;\n" +
-                "            text-align: center;\n" +
-                "            font-weight: bold;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .stats-grid {\n" +
-                "            display: grid;\n" +
-                "            grid-template-columns: 1fr 1fr;\n" +
-                "            gap: 25px;\n" +
-                "            margin-bottom: 25px;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .stat-card {\n" +
-                "            text-align: center;\n" +
-                "            padding: 25px;\n" +
-                "            background: linear-gradient(135deg, rgba(236, 240, 241, 0.1), rgba(189, 195, 199, 0.1));\n" +
-                "            border-radius: 15px;\n" +
-                "            border: 1px solid rgba(212, 175, 55, 0.2);\n" +
-                "            transition: all 0.3s ease;\n" +
-                "            position: relative;\n" +
-                "            overflow: hidden;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .stat-card:hover {\n" +
-                "            transform: translateY(-5px);\n" +
-                "            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);\n" +
-                "            border-color: #d4af37;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .stat-card h3 {\n" +
-                "            font-size: 1.4em;\n" +
-                "            color: #d4af37;\n" +
-                "            margin-bottom: 15px;\n" +
-                "            position: relative;\n" +
-                "            z-index: 1;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .stat-number {\n" +
-                "            font-size: 3em;\n" +
-                "            font-weight: bold;\n" +
-                "            color: #ecf0f1;\n" +
-                "            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);\n" +
-                "            position: relative;\n" +
-                "            z-index: 1;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .genres-section {\n" +
-                "            text-align: center;\n" +
-                "            padding: 20px;\n" +
-                "            background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(243, 156, 18, 0.1));\n" +
-                "            border-radius: 15px;\n" +
-                "            border: 1px solid rgba(241, 196, 15, 0.3);\n" +
-                "        }\n" +
-                "        \n" +
-                "        .genres-section h3 {\n" +
-                "            font-size: 1.6em;\n" +
-                "            color: #f1c40f;\n" +
-                "            margin-bottom: 15px;\n" +
-                "        }\n" +
-                "        \n" +
-                "        .genres-section p {\n" +
-                "            font-size: 1.2em;\n" +
-                "            color: #bdc3c7;\n" +
-                "            font-style: italic;\n" +
-                "        }\n" +
-                "        \n" +
-                "        @media (max-width: 768px) {\n" +
-                "            .main-content { padding: 0 15px; }\n" +
-                "            .stats-grid { grid-template-columns: 1fr; }\n" +
-                "            .header h1 { font-size: 2.2em; }\n" +
-                "            .browse-btn { padding: 15px 30px; font-size: 1.1em; }\n" +
-                "        }\n" +
-                "    </style>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "    <div class=\"header\">\n" +
-                "        <div class=\"user-info\">\n" +
-                "            <span>📖 Welcome, " + user.getFullName() + "</span>\n" +
-                "            <a href=\"/api/logout\" class=\"logout-btn\">🚪 Logout</a>\n" +
-                "        </div>\n" +
-                "        <h1>📚 Grand Library</h1>\n" +
-                "        <p>Your Digital Literary Haven</p>\n" +
-                "    </div>\n" +
-                "\n" +
-                "    <div class=\"main-content\">\n" +
-                "        <div class=\"navigation-section\">\n" +
-                "            <h2>📖 Discover Books</h2>\n" +
-                "            <div style=\"text-align: center; margin: 30px 0;\">\n" +
-                "                <a href=\"/browse\" class=\"browse-btn\">📚 Browse All Books</a>\n" +
-                "                <p style=\"margin-top: 20px; opacity: 0.8; font-size: 1.1em;\">Explore our collection of " + books.size() + " books</p>\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "        \n" +
-                "        <div class=\"quick-stats-section\">\n" +
-                "            <h2>📊 Library Overview</h2>\n" +
-                "            <div class=\"stats-grid\">\n" +
-                "                <div class=\"stat-card\">\n" +
-                "                    <h3>📚 Total Books</h3>\n" +
-                "                    <div class=\"stat-number\">" + books.size() + "</div>\n" +
-                "                </div>\n" +
-                "                <div class=\"stat-card\">\n" +
-                "                    <h3>🎭 Genres Available</h3>\n" +
-                "                    <div class=\"stat-number\">" + getGenreCount() + "</div>\n" +
-                "                </div>\n" +
-                "            </div>\n" +
-                "            <div class=\"genres-section\">\n" +
-                "                <h3>🌟 Popular Genres</h3>\n" +
-                "                <p>" + getTopGenres() + "</p>\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "    </div>\n" +
-                "    <script>\n" +
-                "        function loadBooks() {\n" +
-                "            fetch('/api/books')\n" +
-                "                .then(response => response.json())\n" +
-                "                .then(books => {\n" +
-                "                    const booksList = document.getElementById('booksList');\n" +
-                "                    booksList.innerHTML = '';\n" +
-                "                    books.forEach(book => {\n" +
-                "                        const bookDiv = document.createElement('div');\n" +
-                "                        bookDiv.className = 'book-item';\n" +
-                "                        bookDiv.innerHTML = `<h3>${book.title}</h3><p>by ${book.author}</p>`;\n" +
-                "                        booksList.appendChild(bookDiv);\n" +
-                "                    });\n" +
-                "                });\n" +
-                "        }\n" +
-                "    </script>\n" +
-                "</body>\n" +
-                "</html>";\n" +
-    }\n" +
-\n" +
-    private int getGenreCount() {\n" +
-        return (int) books.stream()\n" +
-                .map(Book::getGenre)\n" +
-                .filter(genre -> genre != null && !genre.isEmpty())\n" +
-                .distinct()\n" +
-                .count();\n" +
-    }\n" +
-\n" +
-    private String getTopGenres() {
-        return books.stream()
-                .filter(book -> book.getGenre() != null)
-                .collect(Collectors.groupingBy(Book::getGenre, Collectors.counting()))
-                .entrySet().stream()
-                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-                .limit(3)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.joining(", "));
-    }
-                "    <style>\n" +
-                "        * { margin: 0; padding: 0; box-sizing: border-box; }\n" +
-                "        body {\n" +
-                "            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n" +
-                "            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n" +
-                "            min-height: 100vh;\n" +
-                "            color: white;\n" +
                 "        }\n" +
                 "        .header {\n" +
                 "            padding: 20px;\n" +
@@ -2398,24 +2068,48 @@ public class AuthenticatedLibraryWebServer {
                 "        <div class=\"navigation-section\">\n" +
                 "            <h2>📖 Discover Books</h2>\n" +
                 "            <div style=\"text-align: center; margin: 30px 0;\">\n" +
-                "                <a href=\"/browse\" style=\"background: rgba(255,255,255,0.2); color: white; padding: 15px 30px; text-decoration: none; border-radius: 25px; font-size: 18px; display: inline-block; margin: 10px; transition: all 0.3s;\">📚 Browse All Books</a>\n" +
-                "                <p style=\"margin-top: 20px; opacity: 0.8;\">Explore our collection of " + books.size() + " books</p>\n" +
+                "                <a href=\"/browse\" style=\"background: rgba(255,255,255,0.2); color: white; padding: 15px 30px; text-decoration: none; border-radius: 25px; font-size: 18px; display: inline-block; margin: 10px; transition: all 0.3s;\">📚 Browse All Books</a>\n"
+                +
+                "                <p style=\"margin-top: 20px; opacity: 0.8;\">Explore our collection of " + books.size()
+                + " books</p>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
-                "        <div class=\"quick-stats-section\" style=\"background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin-bottom: 20px;\">\n" +
+                "        \n" +
+                "        <div class=\"search-section\" style=\"background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin-bottom: 20px;\">\n"
+                +
+                "            <h2>🔍 Search Books</h2>\n" +
+                "            <div style=\"display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px;\">\n"
+                +
+                "                <div>\n" +
+                "                    <input type=\"text\" id=\"searchInput\" placeholder=\"Search by title, author, or genre...\" style=\"width: 100%; padding: 12px; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; background: rgba(255,255,255,0.1); color: white; font-size: 16px;\">\n"
+                +
+                "                </div>\n" +
+                "                <div>\n" +
+                "                    <button onclick=\"searchBooks()\" style=\"width: 100%; background: rgba(255,255,255,0.2); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;\">Search Library</button>\n"
+                +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div id=\"searchResults\" style=\"margin-top: 20px;\"></div>\n" +
+                "        </div>\n" +
+                "        <div class=\"quick-stats-section\" style=\"background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin-bottom: 20px;\">\n"
+                +
                 "            <h2>📊 Library Overview</h2>\n" +
-                "            <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;\">\n" +
-                "                <div style=\"text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;\">\n" +
+                "            <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;\">\n"
+                +
+                "                <div style=\"text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;\">\n"
+                +
                 "                    <h3>📚 Total Books</h3>\n" +
                 "                    <div style=\"font-size: 2em; margin: 10px 0;\">" + books.size() + "</div>\n" +
                 "                </div>\n" +
-                "                <div style=\"text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;\">\n" +
+                "                <div style=\"text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;\">\n"
+                +
                 "                    <h3>🎭 Genres Available</h3>\n" +
                 "                    <div style=\"font-size: 2em; margin: 10px 0;\">" + getGenreCount() + "</div>\n" +
                 "                </div>\n" +
                 "            </div>\n" +
                 "            <div style=\"text-align: center;\">\n" +
                 "                <h3>🌟 Popular Genres</h3>\n" +
+                "                <p>" + getTopGenres() + "</p>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
                 "        \n" +
@@ -2591,7 +2285,7 @@ public class AuthenticatedLibraryWebServer {
                 "            const messages = document.getElementById('chatbotMessages');\n" +
                 "            const messageDiv = document.createElement('div');\n" +
                 "            messageDiv.className = 'chat-message ' + sender + '-message';\n" +
-                "            const formattedMessage = message.replace(/\\\n/g, '<br>').replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n"
+                "            const formattedMessage = message.replace(/\\\\n/g, '<br>').replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n"
                 +
                 "            messageDiv.innerHTML = formattedMessage;\n" +
                 "            messages.appendChild(messageDiv);\n" +
@@ -3172,7 +2866,72 @@ public class AuthenticatedLibraryWebServer {
         html.append("            if (event.target == document.getElementById('bookModal')) {\n");
         html.append("                closeModal();\n");
         html.append("            }\n");
-        html.append("        };\n");
+        html.append("        }\n");
+        html.append("        \n");
+        html.append("        function searchBooks() {\n");
+        html.append("            const query = document.getElementById('searchInput').value.trim();\n");
+        html.append("            const resultsDiv = document.getElementById('searchResults');\n");
+        html.append("            \n");
+        html.append("            if (!query) {\n");
+        html.append(
+                "                resultsDiv.innerHTML = '<p style=\"color: rgba(255,255,255,0.7);\">Please enter a search term</p>';\n");
+        html.append("                return;\n");
+        html.append("            }\n");
+        html.append("            \n");
+        html.append("            fetch('/api/search-books?q=' + encodeURIComponent(query))\n");
+        html.append("                .then(response => response.json())\n");
+        html.append("                .then(data => {\n");
+        html.append("                    if (data.success && data.books.length > 0) {\n");
+        html.append("                        let html = '<div style=\"display: grid; gap: 15px;\">';\n");
+        html.append("                        data.books.forEach(book => {\n");
+        html.append("                            const status = book.readingStatus || 'Not Started';\n");
+        html.append("                            const rating = book.rating || 'No rating';\n");
+        html.append("                            html += `\n");
+        html.append(
+                "                                <div style=\"background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; border-left: 4px solid rgba(76, 175, 80, 0.8);\">\n");
+        html.append(
+                "                                    <h4 style=\"margin: 0 0 5px 0; color: #4CAF50;\">${book.title}</h4>\n");
+        html.append(
+                "                                    <p style=\"margin: 0 0 5px 0; color: rgba(255,255,255,0.9);\">by ${book.author} (${book.publicationYear}) - ${book.genre}</p>\n");
+        html.append(
+                "                                    <div style=\"display: flex; justify-content: space-between; align-items: center; margin-top: 10px;\">\n");
+        html.append(
+                "                                        <span style=\"color: rgba(255,255,255,0.7); font-size: 14px;\">Status: ${status} | Rating: ${rating}</span>\n");
+        html.append(
+                "                                        <button onclick=\"selectBookFromSearch('${book.title}')\" style=\"background: rgba(33, 150, 243, 0.8); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px;\">Select Book</button>\n");
+        html.append("                                    </div>\n");
+        html.append("                                </div>\n");
+        html.append("                            `;\n");
+        html.append("                        });\n");
+        html.append("                        html += '</div>';\n");
+        html.append("                        resultsDiv.innerHTML = html;\n");
+        html.append("                    } else {\n");
+        html.append("                        resultsDiv.innerHTML = `\n");
+        html.append(
+                "                            <div style=\"background: rgba(255, 152, 0, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid rgba(255, 152, 0, 0.8);\">\n");
+        html.append(
+                "                                <p style=\"margin: 0; color: rgba(255, 152, 0, 0.9);\">📚 Book not found in our collection.</p>\n");
+        html.append(
+                "                                <p style=\"margin: 5px 0 0 0; color: rgba(255,255,255,0.7); font-size: 14px;\">Consider requesting it using the form below!</p>\n");
+        html.append("                            </div>\n");
+        html.append("                        `;\n");
+        html.append("                    }\n");
+        html.append("                })\n");
+        html.append("                .catch(error => {\n");
+        html.append(
+                "                    resultsDiv.innerHTML = '<p style=\"color: rgba(244, 67, 54, 0.9);\">Error searching books</p>';\n");
+        html.append("                });\n");
+        html.append("        }\n");
+        html.append("        \n");
+        html.append("        function selectBookFromSearch(title) {\n");
+        html.append("            fetch('/api/book-details?title=' + encodeURIComponent(title))\n");
+        html.append("                .then(response => response.json())\n");
+        html.append("                .then(data => {\n");
+        html.append("                    if (data.success) {\n");
+        html.append("                        showBookModal(data.book);\n");
+        html.append("                    }\n");
+        html.append("                });\n");
+        html.append("        }\n");
         html.append("        \n");
         html.append("    </script>\n");
         html.append("</body>\n</html>");

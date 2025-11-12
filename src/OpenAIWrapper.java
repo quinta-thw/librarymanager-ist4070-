@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * OpenAI API Wrapper for Library Management Chatbot
